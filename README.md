@@ -4,18 +4,12 @@ Use only for testing purposes.
 
 [![build](https://github.com/hoefling/dsa-1571/actions/workflows/build.yml/badge.svg)](https://github.com/hoefling/dsa-1571/actions/workflows/build.yml)
 
-### Local build
-
-```sh
-docker build --platform linux/386 -t openssl/dsa-1571 .
-```
-
 ### Generate example keys and CSRs
 
 ```sh
 # if on 64bit machine, first simulate PIDMAX from a 32bit system:
 echo 32768 > /proc/sys/kernel/pid_max
-docker run --rm -v $(pwd):/io -it openssl/dsa-1571 gencsr
+docker run --rm -v $(pwd):/io -it hoefling/dsa-1571 gencsr
 ```
 
 `gencsr` will generate keys of 512, 1024 and 2048 bits size,
@@ -39,6 +33,14 @@ Generating RSA private key, 2048 bit long modulus
 ......................+++
 e is 65537 (0x10001)
 COMPROMISED: b724c8256936fad04f50042dcb33f1f6f3ce9eee debian-openssl-0.9.8c-x86-prng-bug-2048.key
+```
+
+### Local build
+
+```sh
+git clone https://github.com/hoefling/dsa-1571.git
+cd dsa-1571
+docker build --platform linux/386 -t hoefling/dsa-1571 .
 ```
 
 ### Links
