@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+cd /io/keys
+
+openssl genrsa -out debian-openssl-0.9.8c-x86-prng-bug-512.key 512
+openssl-vulnkey debian-openssl-0.9.8c-x86-prng-bug-512.key
+openssl genrsa -out debian-openssl-0.9.8c-x86-prng-bug-1024.key 1024
+openssl-vulnkey debian-openssl-0.9.8c-x86-prng-bug-1024.key
+openssl genrsa -out debian-openssl-0.9.8c-x86-prng-bug-2048.key 2048
+openssl-vulnkey debian-openssl-0.9.8c-x86-prng-bug-2048.key
+
+openssl req -new -subj '/C=DE/ST=Berlin/L=Berlin/O=Test GmbH/OU=QA Abt./CN=example.com' \
+    -key debian-openssl-0.9.8c-x86-prng-bug-512.key -inform pem -out debian-openssl-0.9.8c-x86-prng-bug-512.csr
+openssl req -new -subj '/C=DE/ST=Berlin/L=Berlin/O=Test GmbH/OU=QA Abt./CN=example.com' \
+    -key debian-openssl-0.9.8c-x86-prng-bug-1024.key -inform pem -out debian-openssl-0.9.8c-x86-prng-bug-1024.csr
+openssl req -new -subj '/C=DE/ST=Berlin/L=Berlin/O=Test GmbH/OU=QA Abt./CN=example.com' \
+    -key debian-openssl-0.9.8c-x86-prng-bug-2048.key -inform pem -out debian-openssl-0.9.8c-x86-prng-bug-2048.csr
